@@ -1,39 +1,58 @@
 <template>
-  <main>
-    <section>
-      <header>
-        <h2>Character</h2>
+  <main class="bg-material-300 max-w-xs mx-auto px-1 py-6">
+    <section class="bg-material-50 rounded">
+      <header class="border-b px-4 pt-6 pb-2">
+        <h2 class="font-bold text-2xl">Character</h2>
       </header>
-      <main>
-        <h3>Basics</h3>
+      <main class="px-4 py-5">
+        <h3 class="text-xl font-bold pb-5">Basics</h3>
         <form>
           <label for="name">
-            <h5>Character</h5>
-            <input v-model="name" type="text" name="name" placeholder="Name" />
+            <h5 class="mb-2">Character</h5>
+            <input
+              v-model="name"
+              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-2"
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
           </label>
           <label for="culture">
             <input
               v-model="culture"
+              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-6"
               type="text"
               name="culture"
               placeholder="Culture & epithet"
             />
           </label>
-          <label for="level">
-            <h5>Level</h5>
-            <input v-model="level" type="text" name="level" />
+          <label for="level" class="flex w-1/3 items-center">
+            <h5 class="w-1/2">Level</h5>
+            <input
+              v-model="level"
+              type="text"
+              name="level"
+              class="border-2 border-material-600 px-4 py-2 w-1/2 rounded mb-2"
+            />
           </label>
-          <label for="AC">
-            <h5>AC</h5>
-            <input v-model="AC" type="text" name="AC" />
+          <label for="AC" class="flex w-1/3 items-center">
+            <h5 class="w-1/2">AC</h5>
+            <input
+              v-model="AC"
+              type="text"
+              name="AC"
+              class="border-2 border-material-600 px-4 py-2 w-1/2 rounded"
+            />
           </label>
         </form>
       </main>
-      <footer>
+      <footer class="border-t px-4 py-5">
         <form>
           <label for="name">
-            <h5>Image</h5>
-            <button>
+            <h5 class="text-xl font-bold pb-5">Image</h5>
+            <button
+              class="rounded border-2 border-black font-bold text-center w-full p-3 transition ease-in-out duration-150 hover:bg-material-400"
+            >
               + Upload character image
             </button>
           </label>
@@ -171,8 +190,8 @@ export default {
       worst_mod: '',
       second_mod: '',
       first_mod: '',
-      AC: '',
-      level: '',
+      AC: 8,
+      level: 1,
       name: '',
       culture: ''
     }

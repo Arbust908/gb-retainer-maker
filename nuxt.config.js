@@ -34,12 +34,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    {
-      src: '~plugins/vue-html2canvas.js',
-      ssr: false
-    }
-  ],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
