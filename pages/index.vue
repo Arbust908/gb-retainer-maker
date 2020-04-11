@@ -1,18 +1,32 @@
 <template>
   <div class="mx-auto">
-    <div class="bg-white overflow-hidden shadow rounded-lg">
+    <section v-if="output">
+      <img :src="output" />
+    </section>
+    <section class="bg-white overflow-hidden shadow rounded-lg">
       <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
         gb-retainer-maker
       </div>
       <div class="px-4 py-5 sm:p-6 flex">
-        <RetainerCard class="mr-6" />
+        <RetainerCard id="front" ref="front" class="mr-6" />
         <BackCard />
       </div>
       <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
-        <!-- Content goes here -->
-        <!-- We use less vertical padding on card footers at all sizes than on headers or body sections -->
+        <button
+          class="border-2 border-blue-500 text-blue-500 bg-transparent rounded hover:text-white hover:bg-blue-500 transition ease-in duration-150 px-4 py-2 mr-4"
+          @click="print"
+        >
+          printMe
+        </button>
+        <nuxt-link
+          to="/retainers/create"
+          class="border-2 border-purple-500 text-purple-500 bg-transparent rounded hover:text-white hover:bg-purple-500 transition ease-in duration-150 px-4 py-2 mr-4"
+          @click="print"
+        >
+          Edit
+        </nuxt-link>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -24,6 +38,27 @@ export default {
   components: {
     RetainerCard,
     BackCard
+  },
+  data() {
+    return {
+      output: null
+    }
+  },
+  methods: {
+    async print() {
+      const el = this.$refs.front
+      console.log(this.$refs)
+      console.log(el)
+      // add option type to get the image version
+      // if not provided the promise will return
+      // the canvas.
+      const options = {
+        type: 'dataURL'
+      }
+      await this.$html2canvas(el, options).then((canvas) => {
+        console.log(canvas.toDataURL('image/jpg'))
+      })
+    }
   }
 }
 </script>

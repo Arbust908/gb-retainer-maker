@@ -34,7 +34,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    {
+      src: '~plugins/vue-html2canvas.js',
+      ssr: false
+    }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -52,7 +57,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-vue-multiselect'
   ],
   /*
    ** Axios module configuration
