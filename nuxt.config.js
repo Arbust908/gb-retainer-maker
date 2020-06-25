@@ -13,6 +13,22 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || ''
       },
+      /** HTTP-EQUIV */
+      {
+        hid: 'contentLanguage',
+        'http-equiv': 'content-language',
+        content: 'en'
+      },
+      {
+        hid: 'XUACompatible',
+        'http-equiv': 'X-UA-Compatible',
+        content: 'ie=edge'
+      },
+      { hid: 'cleartype', 'http-equiv': 'cleartype', content: 'on' },
+      /** UTILIDADES */
+      { hid: 'mobileOptimized', name: 'MobileOptimized', content: '320' },
+      { hid: 'themeColor', name: 'theme-color', content: '#414042' },
+      { hid: 'handheldFriendly', name: 'HandheldFriendly', content: 'True' },
       {
         hid: `og:title`,
         property: 'og:title',

@@ -201,7 +201,7 @@
         </nuxt-link>
       </div>
       <!-- Perfil Mobile -->
-      <div v-if="logedin" class="pt-4 pb-3 border-t border-gray-700">
+      <div v-if="logedIn" class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5 sm:px-6">
           <div class="flex-shrink-0">
             <img
@@ -251,6 +251,9 @@ export default {
   methods: {
     activeLink(link) {
       return this.$route.path === link ? 'active-link' : null
+    },
+    logedIn() {
+      return false
     }
   }
 }
