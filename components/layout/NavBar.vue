@@ -254,6 +254,9 @@ export default {
     },
     logedIn() {
       return false
+    },
+    profileSrc() {
+      return false
     }
   }
 }
