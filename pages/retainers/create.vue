@@ -180,7 +180,7 @@
               :clear-on-select="false"
               :preserve-search="true"
               :max="3"
-              taggable="true"
+              :taggable="true"
               label="name"
               track-by="name"
               @tag="addTag"
