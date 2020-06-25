@@ -1,11 +1,11 @@
 <template>
-  <nav class="bg-main-500 z-10">
+  <nav class="bg-main-500 z-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex">
           <div class="-ml-2 mr-2 flex items-center md:hidden">
             <button
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
+              class="inline-flex items-center justify-center p-2 rounded-md text-secondary-400 hover:text-white hover:bg-secondary-700 focus:outline-none focus:bg-secondary-700 focus:text-white transition duration-150 ease-in-out"
               @click="open = !open"
             >
               <svg
@@ -40,12 +40,7 @@
           </div>
           <div class="flex-shrink-0 flex items-center">
             <img
-              class="block lg:hidden h-8 w-auto"
-              src="@/assets/images/SVG/icon.svg"
-              alt=""
-            />
-            <img
-              class="hidden lg:block h-8 w-auto"
+              class="block h-8 w-auto"
               src="@/assets/images/SVG/icon.svg"
               alt=""
             />
@@ -64,25 +59,21 @@
             >
               Team
             </nuxt-link>
-            <a
-              href="#"
+            <nuxt-link
+              to="/retainers"
               class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
             >
               Retainer Maker
-            </a>
-            <a
-              href="#"
-              class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-              >Calendar</a
-            >
+            </nuxt-link>
           </div>
         </div>
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <span class="rounded-md shadow-sm">
-              <button
+              <nuxt-link
+                to="/retainers/create"
                 type="button"
-                class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
+                class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-400 focus:outline-none focus:shadow-outline-secondary focus:border-secondary-600 active:bg-secondary-600 transition duration-150 ease-in-out"
               >
                 <svg
                   class="-ml-1 mr-2 h-5 w-5"
@@ -95,8 +86,8 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span>New Job</span>
-              </button>
+                <span>New Retainer</span>
+              </nuxt-link>
             </span>
           </div>
           <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
@@ -119,15 +110,31 @@
             </button>
             <div class="ml-3 relative">
               <div>
+                <!-- Profile Pic + Buton -->
                 <button
                   class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
                   @click="open = !open"
                 >
                   <img
+                    v-if="profileSrc"
                     class="h-8 w-8 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
                   />
+                  <span
+                    v-else
+                    class="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100"
+                  >
+                    <svg
+                      class="h-full w-full text-gray-300"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                      />
+                    </svg>
+                  </span>
                 </button>
               </div>
               <transition
@@ -168,30 +175,33 @@
       </div>
     </div>
 
-    <div :class="{ block: open, hidden: !open }" class="hidden md:hidden">
+    <div
+      :class="{ block: open, hidden: !open }"
+      class="bg-main-400 shadow-md md:hidden"
+    >
       <div class="px-2 pt-2 pb-3 sm:px-3">
-        <a
-          href="#"
+        <nuxt-link
+          to="/"
           class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          >Dashboard</a
         >
-        <a
-          href="#"
+          Home
+        </nuxt-link>
+        <nuxt-link
+          to="/"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          >Team</a
+          disabled
         >
-        <a
-          href="#"
+          Team
+        </nuxt-link>
+        <nuxt-link
+          to="/retainers"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          >Projects</a
         >
-        <a
-          href="#"
-          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          >Calendar</a
-        >
+          Retainer
+        </nuxt-link>
       </div>
-      <div class="pt-4 pb-3 border-t border-gray-700">
+      <!-- Perfil Mobile -->
+      <div v-if="logedin" class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5 sm:px-6">
           <div class="flex-shrink-0">
             <img
@@ -236,6 +246,11 @@ export default {
   data() {
     return {
       open: false
+    }
+  },
+  methods: {
+    activeLink(link) {
+      return this.$route.path === link ? 'active-link' : null
     }
   }
 }
