@@ -15,6 +15,32 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
+      main: {
+        default: '#414042',
+        100: '#ECECEC',
+        200: '#D0CFD0',
+        300: '#B3B3B3',
+        400: '#7A797B',
+        500: '#414042',
+        600: '#3B3A3B',
+        700: '#272628',
+        800: '#1D1D1E',
+        900: '#141314'
+      },
+
+      secondary: {
+        default: '#BBAC9B',
+        100: '#F8F7F5',
+        200: '#EEEAE6',
+        300: '#E4DED7',
+        400: '#CFC5B9',
+        500: '#BBAC9B',
+        600: '#A89B8C',
+        700: '#70675D',
+        800: '#544D46',
+        900: '#38342F'
+      },
+
       tailwind: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -755,5 +781,5 @@ module.exports = {
     transitionDuration: ['responsive']
   },
   corePlugins: {},
-  plugins: []
+  plugins: [require('@tailwindcss/ui')]
 }

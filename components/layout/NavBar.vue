@@ -1,6 +1,5 @@
 <template>
-  <nav class="bg-gray-800">
-    <!-- x-data="{ open: true }" -->
+  <nav class="bg-main-500 z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex">
@@ -42,31 +41,35 @@
           <div class="flex-shrink-0 flex items-center">
             <img
               class="block lg:hidden h-8 w-auto"
-              src="/img/logos/workflow-mark-on-dark.svg"
+              src="@/assets/images/SVG/icon.svg"
               alt=""
             />
             <img
               class="hidden lg:block h-8 w-auto"
-              src="/img/logos/workflow-logo-on-dark.svg"
+              src="@/assets/images/SVG/icon.svg"
               alt=""
             />
           </div>
           <div class="hidden md:ml-6 md:flex md:items-center">
-            <a
-              href="#"
+            <nuxt-link
+              to="/"
               class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-              >Dashboard</a
             >
+              Home
+            </nuxt-link>
+            <nuxt-link
+              to="/"
+              class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+              disabled
+            >
+              Team
+            </nuxt-link>
             <a
               href="#"
               class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-              >Team</a
             >
-            <a
-              href="#"
-              class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-              >Projects</a
-            >
+              Retainer Maker
+            </a>
             <a
               href="#"
               class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
@@ -114,8 +117,7 @@
                 />
               </svg>
             </button>
-            <div class="ml-3 relative" x-data="{ open: false }">
-              <!-- @click.away="open = false" -->
+            <div class="ml-3 relative">
               <div>
                 <button
                   class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
@@ -128,34 +130,38 @@
                   />
                 </button>
               </div>
-              <div
-                x-show="open"
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="transform opacity-0 scale-95"
-                x-transition:enter-end="transform opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-75"
-                x-transition:leave-start="transform opacity-100 scale-100"
-                x-transition:leave-end="transform opacity-0 scale-95"
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+              <transition
+                name="custom-classes-transition"
+                enter-active-class="transition transform ease-out duration-200"
+                enter-class="opacity-0 scale-75"
+                enter-to-class="opacity-100 scale-100"
+                leave-active-class="transition transform ease-in duration-150"
+                leave-class="opacity-100 scale-100"
+                leave-to="opacity-0 scale-75"
               >
-                <div class="py-1 rounded-md bg-white shadow-xs">
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >Your Profile</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >Settings</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >Sign out</a
-                  >
-                </div>
-              </div>
+                <aside
+                  v-if="open"
+                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                >
+                  <nav class="py-1 rounded-md bg-white shadow-xs">
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                      >Your Profile</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                      >Settings</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                      >Sign out</a
+                    >
+                  </nav>
+                </aside>
+              </transition>
             </div>
           </div>
         </div>
@@ -224,3 +230,13 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      open: false
+    }
+  }
+}
+</script>
