@@ -26,6 +26,7 @@
           Edit
         </nuxt-link>
       </div>
+      <img v-if="output" :src="output" />
     </section>
   </div>
 </template>
@@ -46,18 +47,14 @@ export default {
   },
   methods: {
     async print() {
-      const el = this.$refs.front
-      console.log(this.$refs)
-      console.log(el)
+      const el = document.getElementById('front')
       // add option type to get the image version
       // if not provided the promise will return
       // the canvas.
       const options = {
         type: 'dataURL'
       }
-      await this.$html2canvas(el, options).then((canvas) => {
-        console.log(canvas.toDataURL('image/jpg'))
-      })
+      this.output = await this.$html2canvas(el, options)
     }
   }
 }
