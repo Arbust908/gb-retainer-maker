@@ -1,7 +1,7 @@
 <template>
   <article
     :style="backgroundImg"
-    class="rounded-xl border-8 border-orange-700 overflow-hidden bg-center bg-cover bg-no-repeat relative"
+    class="rounded-xl border-8 border-orange-700 overflow-hidden bg-center bg-cover bg-no-repeat relative transform transition duration-300 ease-in-out scale-75 sm:scale-100"
     style="width: 380px; height: 572px"
   >
     <aside class="absolute inset-0 bg-orange-600 opacity-75 z-10" />

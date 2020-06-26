@@ -8,60 +8,37 @@
               class="inline-flex items-center justify-center p-2 rounded-md text-secondary-400 hover:text-white hover:bg-secondary-700 focus:outline-none focus:bg-secondary-700 focus:text-white transition duration-150 ease-in-out"
               @click="open = !open"
             >
-              <svg
-                :class="{ hidden: open, block: !open }"
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <svg
-                :class="{ hidden: !open, block: open }"
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <Bars :class="{ hidden: open, block: !open }" class="h-6 w-6" />
+              <Close :class="{ hidden: !open, block: open }" class="h-6 w-6" />
             </button>
           </div>
-          <div class="flex-shrink-0 flex items-center">
+          <nuxt-link to="/" class="flex-shrink-0 flex items-center">
             <img
-              class="block h-8 w-auto"
+              class="block h-8 w-auto hover:opacity-75"
               src="@/assets/images/SVG/icon.svg"
               alt=""
             />
-          </div>
+          </nuxt-link>
           <div class="hidden md:ml-6 md:flex md:items-center">
             <nuxt-link
               to="/"
-              class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+              class="nav-link__desktop"
+              :class="activeLink('/')"
             >
               Home
             </nuxt-link>
             <nuxt-link
-              to="/"
-              class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+              to="/team"
+              class="nav-link__desktop"
+              :class="activeLink('/team')"
               disabled
             >
               Team
             </nuxt-link>
             <nuxt-link
               to="/retainers"
-              class="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+              class="nav-link__desktop"
+              :class="activeLink('/retainers')"
             >
               Retainer Maker
             </nuxt-link>
@@ -71,6 +48,7 @@
           <div class="flex-shrink-0">
             <span class="rounded-md shadow-sm">
               <nuxt-link
+                v-if="this.$route.path !== '/retainers/create'"
                 to="/retainers/create"
                 type="button"
                 class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-400 focus:outline-none focus:shadow-outline-secondary focus:border-secondary-600 active:bg-secondary-600 transition duration-150 ease-in-out"
@@ -88,9 +66,20 @@
                 </svg>
                 <span>New Retainer</span>
               </nuxt-link>
+              <nuxt-link
+                v-else
+                to="/retainers"
+                type="button"
+                class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-400 focus:outline-none focus:shadow-outline-secondary focus:border-secondary-600 active:bg-secondary-600 transition duration-150 ease-in-out"
+              >
+                <span>View Retainer</span>
+              </nuxt-link>
             </span>
           </div>
-          <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+          <div
+            v-if="logedIn"
+            class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center"
+          >
             <button
               class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-gray-300 focus:outline-none focus:text-gray-500 focus:bg-gray-100 transition duration-150 ease-in-out"
             >
@@ -180,22 +169,21 @@
       class="bg-main-400 shadow-md md:hidden"
     >
       <div class="px-2 pt-2 pb-3 sm:px-3">
-        <nuxt-link
-          to="/"
-          class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-        >
+        <nuxt-link to="/" class="nav-link__desktop" :class="activeLink('/')">
           Home
         </nuxt-link>
         <nuxt-link
-          to="/"
-          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          to="/team"
+          class="nav-link__desktop"
+          :class="activeLink('/team')"
           disabled
         >
           Team
         </nuxt-link>
         <nuxt-link
           to="/retainers"
-          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          class="nav-link__desktop"
+          :class="activeLink('/retainers')"
         >
           Retainer
         </nuxt-link>
@@ -257,7 +245,14 @@
 </template>
 
 <script>
+import Bars from '@/components/icons/Bars'
+import Close from '@/components/icons/Close'
+
 export default {
+  components: {
+    Bars,
+    Close
+  },
   data() {
     return {
       open: false
@@ -273,8 +268,28 @@ export default {
   },
   methods: {
     activeLink(link) {
+      console.log(this.$route.path)
+      console.log(link)
       return this.$route.path === link ? 'active-link' : null
     }
   }
 }
 </script>
+
+<style scoped>
+.nav-link__desktop {
+  @apply px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-transparent transition duration-150 ease-in-out;
+}
+.nav-link__desktop.active-link {
+  @apply text-main-200 bg-main-700;
+}
+.nav-link__desktop[disabled] {
+  @apply text-main-200 cursor-not-allowed;
+}
+.nav-link__desktop:focus {
+  @apply outline-none text-white bg-main-700;
+}
+.nav-link__desktop:hover {
+  @apply text-white bg-main-700;
+}
+</style>

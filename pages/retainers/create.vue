@@ -266,7 +266,7 @@
       <main class="px-4 py-5">
         <form>
           <textarea
-            id=""
+            v-model="quote"
             name="quote"
             rows="2"
             placeholder="To be or not to be..."
@@ -276,10 +276,18 @@
         </form>
       </main>
     </section>
+    <section class="w-full max-w-xs bg-material-50 rounded m-2">
+      <main class="px-4 py-5">
+        <button class="btn btn__main" @click="save">
+          save
+        </button>
+      </main>
+    </section>
   </main>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Multiselect from 'vue-multiselect'
 import SpecialActionForm from '~/components/create/SpecialActionForm'
 export default {
@@ -299,6 +307,7 @@ export default {
       name: '',
       culture: '',
       selected_skills: [],
+      quote: '',
       skills: [
         { name: 'Athletics', stat: 'STR' },
         { name: 'Acrobatics', stat: 'DEX' },
@@ -322,6 +331,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      createRetainer: 'retainers/crateRetainer'
+    }),
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -329,6 +341,22 @@ export default {
       }
       this.options.push(tag)
       this.value.push(tag)
+    },
+    save() {
+      const retainer = {
+        signature_name: this.signature_name,
+        active_worst_mod: this.active_worst_mod,
+        worst_mod: this.worst_mod,
+        second_mod: this.second_mod,
+        first_mod: this.first_mod,
+        AC: this.AC,
+        level: this.level,
+        name: this.name,
+        culture: this.culture,
+        selected_skills: this.selected_skills,
+        quote: this.quote
+      }
+      this.createRetainer(retainer)
     }
   }
 }
@@ -337,5 +365,20 @@ export default {
 <style scoped>
 .stat-dropdown {
   width: 26%;
+}
+.btn {
+  @apply border-2 rounded transition ease-in duration-150 px-4 py-2 mr-4;
+}
+.btn__main {
+  @apply border-main-500 text-secondary-100 bg-main-500;
+}
+.btn__alter {
+  @apply border-main-500 text-main-500 bg-transparent;
+}
+.btn__main:hover {
+  @apply text-main-500 bg-transparent;
+}
+.btn__alter:hover {
+  @apply text-secondary-100 bg-main-500;
 }
 </style>

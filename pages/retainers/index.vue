@@ -1,37 +1,29 @@
 <template>
-  <div class="mx-auto">
-    <section v-if="output">
-      <img :src="output" />
+  <main class="mx-auto">
+    <section class="py-5 sm:p-6 flex flex-wrap justify-center">
+      <RetainerCard
+        id="front"
+        ref="front"
+        class="mb-4 transform transition duration-300 ease-in-out scale-75 sm:scale-100"
+      />
+      <BackCard
+        class="hidden transform transition duration-300 ease-in-out scale-75 sm:scale-100"
+      />
     </section>
-    <section class="bg-white overflow-hidden shadow rounded-lg">
-      <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
-        gb-retainer-maker
-      </div>
-      <div class="px-4 py-5 sm:p-6 flex">
-        <RetainerCard id="front" ref="front" class="mr-6" />
-        <BackCard />
-      </div>
-      <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
-        <button
-          class="border-2 border-blue-500 text-blue-500 bg-transparent rounded hover:text-white hover:bg-blue-500 transition ease-in duration-150 px-4 py-2 mr-4"
-          @click="print"
-        >
-          printMe
-        </button>
-        <nuxt-link
-          to="/retainers/create"
-          class="border-2 border-purple-500 text-purple-500 bg-transparent rounded hover:text-white hover:bg-purple-500 transition ease-in duration-150 px-4 py-2 mr-4"
-          @click="print"
-        >
-          Edit
-        </nuxt-link>
-      </div>
-      <img v-if="output" :src="output" />
+    <section class="border-t border-gray-200 px-4 py-4 sm:px-6">
+      <button class="btn btn__main" @click="print">
+        printMe
+      </button>
+      <nuxt-link to="/retainers/create" class="btn btn__alter">
+        Edit
+      </nuxt-link>
     </section>
-  </div>
+    <img v-if="output" :src="output" />
+  </main>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import RetainerCard from '~/components/retainers/RetainerCard'
 import BackCard from '~/components/retainers/BackCard'
 
@@ -45,8 +37,12 @@ export default {
       output: null
     }
   },
+  computed: {
+    ...mapState({
+      retainer: (state) => state.retainer.active
+    })
+  },
   methods: {
-    // async
     async print() {
       const el = document.getElementById('front')
       // add option type to get the image version
@@ -60,3 +56,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn {
+  @apply border-2 rounded transition ease-in duration-150 px-4 py-2 mr-4;
+}
+.btn__main {
+  @apply border-main-500 text-secondary-100 bg-main-500;
+}
+.btn__alter {
+  @apply border-main-500 text-main-500 bg-transparent;
+}
+.btn__main:hover {
+  @apply text-main-500 bg-transparent;
+}
+.btn__alter:hover {
+  @apply text-secondary-100 bg-main-500;
+}
+</style>
