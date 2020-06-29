@@ -153,7 +153,7 @@ export default {
     [
       '@yabhq/nuxt-hotjar',
       {
-        hjid: 1876513, // required
+        hjid: 1877978, // required
         hjsv: 6, // optional
         defer: true, // optional
         async: false, // optional
