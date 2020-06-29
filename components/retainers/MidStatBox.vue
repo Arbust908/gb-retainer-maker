@@ -14,6 +14,7 @@
         <span class="uppercase font-light">{{ skill.stat }}</span>
       </div>
       <div
+        v-if="special.active"
         class="bg-orange-700 rounded-md flex flex-col justify-center p-1 items-center"
       >
         <h5 class="text-2xs font-bold">{{ special.title }}</h5>
@@ -24,7 +25,7 @@
       class="bg-orange-900 rounded-full rounded-l flex flex-col w-1/2 p-1 pr-4"
     >
       <h3 class="text-2xs">Skills</h3>
-      <p class="text-xs">{{ skills }}</p>
+      <p class="text-xs">{{ formatedSkills }}</p>
     </article>
   </article>
 </template>
@@ -32,8 +33,10 @@
 export default {
   props: {
     skills: {
-      type: String,
-      default: 'All da Skillz'
+      type: Array,
+      default() {
+        return ['All da Skillz']
+      }
     },
     special: {
       type: Object,
@@ -49,6 +52,11 @@ export default {
           { stat: 'str', mod: '+2' }
         ]
       }
+    }
+  },
+  computed: {
+    formatedSkills() {
+      return this.skills.join(', ').replace(/, ([^,]*)$/, ' and $1')
     }
   }
 }

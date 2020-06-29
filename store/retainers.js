@@ -1,7 +1,20 @@
 export const state = () => ({
   filter: 'all',
   all: [],
-  active: {},
+  active: {
+    signature_name: 'Placeholder Maker',
+    worst_is_active: false,
+    worst: { stat: null, mod: 0 },
+    second: { stat: null, mod: 0 },
+    first: { stat: null, mod: 0 },
+    AC: 12,
+    level: 2,
+    name: 'Placholder Boi',
+    culture: 'Internet Nerd',
+    selected_skills: [],
+    quote: `Placeholder? Thats my artistic name... I'm ****`,
+    slots: 10
+  },
   loader: false
 })
 

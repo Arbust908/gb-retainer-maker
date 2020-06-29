@@ -149,7 +149,17 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    'nuxt-vue-multiselect'
+    'nuxt-vue-multiselect',
+    [
+      '@yabhq/nuxt-hotjar',
+      {
+        hjid: 1876513, // required
+        hjsv: 6, // optional
+        defer: true, // optional
+        async: false, // optional
+        dev: true // optional
+      }
+    ]
   ],
   /*
    ** Axios module configuration

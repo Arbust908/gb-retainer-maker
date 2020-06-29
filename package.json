@@ -25,6 +25,7 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@tailwindcss/ui": "^0.3.0",
+    "@yabhq/nuxt-hotjar": "^0.2.0",
     "nuxt": "^2.0.0",
     "nuxt-start": "^2.13.1",
     "nuxt-vue-multiselect": "^1.0.4",

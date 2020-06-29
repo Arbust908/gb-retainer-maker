@@ -169,12 +169,16 @@
       class="bg-main-400 shadow-md md:hidden"
     >
       <div class="px-2 pt-2 pb-3 sm:px-3">
-        <nuxt-link to="/" class="nav-link__desktop" :class="activeLink('/')">
+        <nuxt-link
+          to="/"
+          class="nav-link__desktop block"
+          :class="activeLink('/')"
+        >
           Home
         </nuxt-link>
         <nuxt-link
           to="/team"
-          class="nav-link__desktop"
+          class="nav-link__desktop block"
           :class="activeLink('/team')"
           disabled
         >
@@ -182,7 +186,7 @@
         </nuxt-link>
         <nuxt-link
           to="/retainers"
-          class="nav-link__desktop"
+          class="nav-link__desktop block"
           :class="activeLink('/retainers')"
         >
           Retainer
@@ -268,8 +272,6 @@ export default {
   },
   methods: {
     activeLink(link) {
-      console.log(this.$route.path)
-      console.log(link)
       return this.$route.path === link ? 'active-link' : null
     }
   }
@@ -286,10 +288,10 @@ export default {
 .nav-link__desktop[disabled] {
   @apply text-main-200 cursor-not-allowed;
 }
-.nav-link__desktop:focus {
+.nav-link__desktop:focus:not([disabled]) {
   @apply outline-none text-white bg-main-700;
 }
-.nav-link__desktop:hover {
+.nav-link__desktop:hover:not([disabled]) {
   @apply text-white bg-main-700;
 }
 </style>

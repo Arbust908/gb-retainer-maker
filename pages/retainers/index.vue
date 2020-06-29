@@ -1,14 +1,9 @@
 <template>
   <main class="mx-auto">
     <section class="py-5 sm:p-6 flex flex-wrap justify-center">
-      <RetainerCard
-        id="front"
-        ref="front"
-        class="mb-4 transform transition duration-300 ease-in-out scale-75 sm:scale-100"
-      />
-      <BackCard
-        class="hidden transform transition duration-300 ease-in-out scale-75 sm:scale-100"
-      />
+      {{ retainer }}
+      <RetainerCard id="front" ref="front" class="m-4 shadow-xl" />
+      <BackCard id="back" ref="back" class="m-4 shadow-xl" />
     </section>
     <section class="border-t border-gray-200 px-4 py-4 sm:px-6">
       <button class="btn btn__main" @click="print">
@@ -18,7 +13,10 @@
         Edit
       </nuxt-link>
     </section>
-    <img v-if="output" :src="output" />
+    <section>
+      <img v-if="output" class="w-full mx-4" :src="output.front" />
+      <img v-if="output" class="w-full mx-4" :src="output.back" />
+    </section>
   </main>
 </template>
 
@@ -39,19 +37,23 @@ export default {
   },
   computed: {
     ...mapState({
-      retainer: (state) => state.retainer.active
+      retainer: (state) => state.retainers.active
     })
   },
   methods: {
     async print() {
-      const el = document.getElementById('front')
+      const front = document.getElementById('front')
+      const back = document.getElementById('front')
       // add option type to get the image version
       // if not provided the promise will return
       // the canvas.
       const options = {
         type: 'dataURL'
       }
-      this.output = await this.$html2canvas(el, options)
+      this.output = {
+        front: await this.$html2canvas(front, options),
+        back: await this.$html2canvas(back, options)
+      }
     }
   }
 }

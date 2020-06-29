@@ -1,6 +1,6 @@
 <template>
   <main
-    class="bg-material-300 mx-auto px-1 py-6 flex flex-wrap justify-start items-start"
+    class="w-full bg-material-300 mx-auto px-1 py-6 flex flex-wrap justify-start items-start lg:justify-center"
   >
     <section class="w-full max-w-xs bg-material-50 rounded m-2">
       <header class="border-b px-4 pt-6 pb-2">
@@ -13,7 +13,7 @@
             <h5 class="mb-2">Character</h5>
             <input
               v-model="name"
-              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-2"
+              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-2 focus:border-material-600"
               type="text"
               name="name"
               placeholder="Name"
@@ -22,28 +22,28 @@
           <label for="culture">
             <input
               v-model="culture"
-              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-6"
+              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-6 focus:border-material-600"
               type="text"
               name="culture"
               placeholder="Culture & epithet"
             />
           </label>
-          <label for="level" class="flex w-1/3 items-center">
+          <label for="level" class="flex w-1/3 items-center  mb-2">
             <h5 class="w-1/2">Level</h5>
             <input
               v-model="level"
               type="text"
               name="level"
-              class="border-2 border-material-600 px-4 py-2 w-1/2 rounded mb-2"
+              class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
             />
           </label>
-          <label for="AC" class="flex w-1/3 items-center">
+          <label for="AC" class="flex w-1/3 items-center  mb-2">
             <h5 class="w-1/2">AC</h5>
             <input
               v-model="AC"
               type="text"
               name="AC"
-              class="border-2 border-material-600 px-4 py-2 w-1/2 rounded"
+              class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
             />
           </label>
         </form>
@@ -71,22 +71,20 @@
           The ability modifier is based on the character's level
         </p>
         <form>
-          <label
-            for="first_stat"
-            class="w-full flex justify-between items-center"
-          >
+          <label for="first" class="w-full flex justify-between items-center">
             <h5 class="w-1/2">
               <span class="font-bold">First ability</span>
             </h5>
             <div class="w-1/2 flex">
               <input
-                v-model="first_mod"
+                v-model="first.mod"
                 type="text"
                 class="w-5/12 rounded border placeholder-material-400 px-4 py-2 mb-2 mr-1"
                 name="first_mod"
               />
               <select
-                name="first_stat"
+                v-model="first.name"
+                name="first"
                 class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
               >
                 <option selected disabled>Stat</option>
@@ -99,22 +97,20 @@
               </select>
             </div>
           </label>
-          <label
-            for="second_stat"
-            class="w-full flex justify-between items-center"
-          >
+          <label for="second" class="w-full flex justify-between items-center">
             <h5 class="w-1/2">
               <span class="font-bold">Second ability</span>
             </h5>
             <div class="w-1/2 flex">
               <input
-                v-model="second_mod"
+                v-model="second.mod"
                 type="text"
                 class="w-5/12 rounded border placeholder-material-400 px-4 py-2 mb-2 mr-1"
                 name="second_mod"
               />
               <select
-                name="second_stat"
+                v-model="second.name"
+                name="second"
                 class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
               >
                 <option selected disabled>Stat</option>
@@ -127,10 +123,10 @@
               </select>
             </div>
           </label>
-          <label for="worst_stat" class="w-full flex items-center">
+          <label for="worst" class="w-full flex items-center">
             <h5 class="w-1/2 flex items-center">
               <input
-                v-model="active_worst_mod"
+                v-model="worst_is_active"
                 type="checkbox"
                 class="form-checkbox w-4 h-4 mr-1"
                 name=""
@@ -139,16 +135,17 @@
             </h5>
             <div class="w-1/2 flex">
               <input
-                v-model="worst_mod"
+                v-model="worst.mod"
                 type="text"
                 class="w-5/12 text-xs rounded border placeholder-material-400 px-1 py-1 mb-2 mr-1"
-                :disabled="!active_worst_mod"
+                :disabled="!worst_is_active"
                 name="worst_mod"
               />
               <select
-                name="worst_stat"
+                v-model="worst.name"
+                name="worst"
                 class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
-                :disabled="!active_worst_mod"
+                :disabled="!worst_is_active"
               >
                 <option selected disabled>Stat</option>
                 <option value="str">STR</option>
@@ -168,7 +165,7 @@
           Skill scores are based on the character's level and abilities
         </p>
         <form>
-          <label for="first_stat">
+          <label for="skills">
             <h5>Add skills below</h5>
             <Multiselect
               v-model="selected_skills"
@@ -181,7 +178,7 @@
               :preserve-search="true"
               :max="3"
               :taggable="true"
-              label="name"
+              label="skills"
               track-by="name"
               @tag="addTag"
             >
@@ -297,16 +294,16 @@ export default {
   },
   data() {
     return {
-      signature_name: '',
-      active_worst_mod: false,
-      worst_mod: '',
-      second_mod: '',
-      first_mod: '',
-      AC: 8,
-      level: 1,
       name: '',
       culture: '',
+      level: 1,
+      AC: 8,
+      first: { stat: null, mod: 0 },
+      second: { stat: null, mod: 0 },
+      worst_is_active: false,
+      worst: { stat: null, mod: 0 },
       selected_skills: [],
+      signature_name: '',
       quote: '',
       skills: [
         { name: 'Athletics', stat: 'STR' },
@@ -357,6 +354,7 @@ export default {
         quote: this.quote
       }
       this.createRetainer(retainer)
+      this.$router.push({ path: `/retainers` })
     }
   }
 }
