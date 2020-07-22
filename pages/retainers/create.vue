@@ -1,7 +1,8 @@
 <template>
   <main
-    class="w-full bg-material-300 mx-auto px-1 py-6 flex flex-wrap justify-start items-start lg:justify-center"
+    class="w-full bg-material-300 mx-auto px-1 py-6 flex flex-wrap items-start justify-center"
   >
+    {{ retainer }}
     <section class="w-full max-w-xs bg-material-50 rounded m-2">
       <header class="border-b px-4 pt-6 pb-2">
         <h2 class="font-bold text-2xl">Character</h2>
@@ -12,8 +13,8 @@
           <label for="name">
             <h5 class="mb-2">Character</h5>
             <input
-              v-model="name"
-              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-2 focus:border-material-600"
+              :value="retainer.name"
+              class="w-full rounded border-2 placeholder-material-400 px-4 py-2 mb-2 focus:border-material-600"
               type="text"
               name="name"
               placeholder="Name"
@@ -21,8 +22,8 @@
           </label>
           <label for="culture">
             <input
-              v-model="culture"
-              class="w-full rounded border placeholder-material-400 px-4 py-2 mb-6 focus:border-material-600"
+              :value="retainer.culture"
+              class="w-full rounded border-2 placeholder-material-400 px-4 py-2 mb-6 focus:border-material-600"
               type="text"
               name="culture"
               placeholder="Culture & epithet"
@@ -31,7 +32,7 @@
           <label for="level" class="flex w-1/3 items-center  mb-2">
             <h5 class="w-1/2">Level</h5>
             <input
-              v-model="level"
+              :value="retainer.level"
               type="text"
               name="level"
               class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
@@ -40,7 +41,7 @@
           <label for="AC" class="flex w-1/3 items-center  mb-2">
             <h5 class="w-1/2">AC</h5>
             <input
-              v-model="AC"
+              :value="retainer.AC"
               type="text"
               name="AC"
               class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
@@ -77,15 +78,14 @@
             </h5>
             <div class="w-1/2 flex">
               <input
-                v-model="first.mod"
+                :value="retainer.first.mod"
                 type="text"
-                class="w-5/12 rounded border placeholder-material-400 px-4 py-2 mb-2 mr-1"
+                class="w-5/12 rounded border-2 placeholder-material-400 px-4 py-2 mb-2 mr-1"
                 name="first_mod"
               />
               <select
-                v-model="first.name"
                 name="first"
-                class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
+                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
               >
                 <option selected disabled>Stat</option>
                 <option value="str">STR</option>
@@ -103,15 +103,14 @@
             </h5>
             <div class="w-1/2 flex">
               <input
-                v-model="second.mod"
+                :value="retainer.second.mod"
                 type="text"
-                class="w-5/12 rounded border placeholder-material-400 px-4 py-2 mb-2 mr-1"
+                class="w-5/12 rounded border-2 placeholder-material-400 px-4 py-2 mb-2 mr-1"
                 name="second_mod"
               />
               <select
-                v-model="second.name"
                 name="second"
-                class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
+                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
               >
                 <option selected disabled>Stat</option>
                 <option value="str">STR</option>
@@ -129,7 +128,6 @@
                 v-model="worst_is_active"
                 type="checkbox"
                 class="form-checkbox w-4 h-4 mr-1"
-                name=""
               />
               <span class="font-bold">Worst ability</span>
             </h5>
@@ -137,14 +135,14 @@
               <input
                 v-model="worst.mod"
                 type="text"
-                class="w-5/12 text-xs rounded border placeholder-material-400 px-1 py-1 mb-2 mr-1"
+                class="w-5/12 text-xs rounded border-2 placeholder-material-400 px-1 py-1 mb-2 mr-1"
                 :disabled="!worst_is_active"
                 name="worst_mod"
               />
               <select
                 v-model="worst.name"
                 name="worst"
-                class="w-7/12 rounded border px-4 py-2 mb-2 form-select"
+                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
                 :disabled="!worst_is_active"
               >
                 <option selected disabled>Stat</option>
@@ -248,12 +246,14 @@
       </main>
       <footer class="border-t px-4 py-5">
         <h3 class="text-xl font-bold pb-1">Special actions</h3>
+        <SpecialActionForm v-for="special in specials" :key="special.id" />
         <button
+          v-if="specials.length <= 2"
           class="rounded border-2 border-black font-bold text-center w-full p-3 transition ease-in-out duration-150 hover:bg-material-400"
+          @click="addSpecial"
         >
           + Add special action
         </button>
-        <SpecialActionForm />
       </footer>
     </section>
     <section class="w-full max-w-xs bg-material-50 rounded m-2">
@@ -284,7 +284,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Multiselect from 'vue-multiselect'
 import SpecialActionForm from '~/components/create/SpecialActionForm'
 export default {
@@ -294,17 +294,14 @@ export default {
   },
   data() {
     return {
-      name: '',
-      culture: '',
-      level: 1,
-      AC: 8,
-      first: { stat: null, mod: 0 },
-      second: { stat: null, mod: 0 },
-      worst_is_active: false,
-      worst: { stat: null, mod: 0 },
-      selected_skills: [],
-      signature_name: '',
-      quote: '',
+      stats: [
+        { name: 'Strength', code: 'STR' },
+        { name: 'Dexterity', code: 'DEX' },
+        { name: 'Constitution', code: 'CON' },
+        { name: 'Inteligence', code: 'INT' },
+        { name: 'Wisdom', code: 'WIS' },
+        { name: 'Charisma', code: 'CHA' }
+      ],
       skills: [
         { name: 'Athletics', stat: 'STR' },
         { name: 'Acrobatics', stat: 'DEX' },
@@ -327,9 +324,15 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState({
+      retainer: (state) => state.retainers.active
+    })
+  },
   methods: {
     ...mapActions({
-      createRetainer: 'retainers/crateRetainer'
+      addSpecial: 'retainers/addSpecial',
+      setAttribute: 'retainer/setAttribute'
     }),
     addTag(newTag) {
       const tag = {
@@ -340,20 +343,6 @@ export default {
       this.value.push(tag)
     },
     save() {
-      const retainer = {
-        signature_name: this.signature_name,
-        active_worst_mod: this.active_worst_mod,
-        worst_mod: this.worst_mod,
-        second_mod: this.second_mod,
-        first_mod: this.first_mod,
-        AC: this.AC,
-        level: this.level,
-        name: this.name,
-        culture: this.culture,
-        selected_skills: this.selected_skills,
-        quote: this.quote
-      }
-      this.createRetainer(retainer)
       this.$router.push({ path: `/retainers` })
     }
   }

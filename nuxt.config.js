@@ -157,7 +157,7 @@ export default {
         hjsv: 6, // optional
         defer: true, // optional
         async: false, // optional
-        dev: true // optional
+        dev: false // optional
       }
     ]
   ],

@@ -2,18 +2,19 @@ export const state = () => ({
   filter: 'all',
   all: [],
   active: {
-    signature_name: 'Placeholder Maker',
+    name: '',
+    culture: '',
+    level: 1,
+    AC: 8,
+    first: { stat: null, mod: 0 },
+    second: { stat: null, mod: 0 },
     worst_is_active: false,
     worst: { stat: null, mod: 0 },
-    second: { stat: null, mod: 0 },
-    first: { stat: null, mod: 0 },
-    AC: 12,
-    level: 2,
-    name: 'Placholder Boi',
-    culture: 'Internet Nerd',
     selected_skills: [],
-    quote: `Placeholder? Thats my artistic name... I'm ****`,
-    slots: 10
+    signature_name: '',
+    specials: [],
+    quote: '',
+    slots: 1
   },
   loader: false
 })
@@ -41,11 +42,24 @@ export const actions = {
   },
   crateRetainer({ commit }, retainer) {
     // Cambiar por algo tipo create Active o push al All
-    console.log(retainer)
     commit('SET_ACTIVE', retainer)
   },
   setLoaderState({ commit }, state) {
     commit('SET_LOADER_STATE', state)
+  },
+  addSpecial({ commit, state }) {
+    const id = state.specials.length + 1
+    const special = {
+      id,
+      name: null,
+      cost: null,
+      description: null,
+      daily: 0
+    }
+    commit('ADD_SPECIAL', special)
+  },
+  setAttribute({ commit }, key, value) {
+    commit('SET_ATTR', key, value)
   }
 }
 
@@ -64,5 +78,11 @@ export const mutations = {
   },
   SET_LOADER_STATE(state, payload) {
     state.loading_posts = payload
+  },
+  ADD_SPECIAL(state, payload) {
+    state.specials.push(payload)
+  },
+  SET_ATTR(state, key, payload) {
+    state[key] = payload
   }
 }

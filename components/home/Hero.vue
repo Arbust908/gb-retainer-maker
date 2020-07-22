@@ -31,35 +31,34 @@
                 href="https://www.reddit.com/user/lufresh"
                 class="text-secondary-500 underline hover:text-secondary-800 hover:no-underline"
                 target="_blanck"
-                >r/lufresh</a
               >
+                r/lufresh
+              </a>
               and the retainer rules from
               <a
                 href="https://shop.mcdmproductions.com/products/strongholds-followers-hardcover-pdf?variant=28762180649008"
                 class="text-secondary-500 underline hover:text-secondary-800 hover:no-underline"
                 target="_blanck"
               >
-                MCDMs Strongholds and Followers</a
-              >
+                MCDMs Strongholds and Followers
+              </a>
             </p>
             <div
               class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start"
             >
               <div class="rounded-md shadow">
-                <a
-                  href="#"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-secondary-600 hover:bg-secondary-500 focus:outline-none focus:border-secondary-700 focus:shadow-outline-secondary transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
-                >
+                <nuxt-link to="/retainers" class="main-btn">
                   Get started
-                </a>
+                </nuxt-link>
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a
-                  href="#"
+                <nuxt-link
+                  to="#"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-secondary-700 bg-secondary-100 hover:text-secondary-600 hover:bg-secondary-50 focus:outline-none focus:shadow-outline-secondary focus:border-secondary-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                  disabled
                 >
-                  Live demo
-                </a>
+                  Register
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -70,8 +69,26 @@
       <img
         class="h-56 w-full object-cover object-right sm:h-72 md:h-96 lg:w-full lg:h-full"
         src="@/assets/images/DnD_DMG_Art.jpg"
-        alt=""
+        alt="Image of the Dungeon Master Guide"
       />
     </div>
   </section>
 </template>
+
+<style scoped>
+.main-btn {
+  @apply w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-secondary-600 transition duration-150 ease-in-out;
+}
+.main-btn:hover {
+  @apply bg-secondary-500;
+}
+.main-btn:focus {
+  @apply outline-none border-secondary-700;
+}
+/* shadow-outline-secondary */
+@media screen and (min-width: 768px) {
+  .main-btn {
+    @apply py-4 text-lg px-10;
+  }
+}
+</style>
