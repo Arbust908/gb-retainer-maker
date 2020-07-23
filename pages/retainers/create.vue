@@ -1,371 +1,414 @@
 <template>
-  <main
-    class="w-full bg-material-300 mx-auto px-1 py-6 flex flex-wrap items-start justify-center"
-  >
-    {{ retainer }}
-    <section class="w-full max-w-xs bg-material-50 rounded m-2">
-      <header class="border-b px-4 pt-6 pb-2">
-        <h2 class="font-bold text-2xl">Character</h2>
-      </header>
-      <main class="px-4 py-5">
-        <h3 class="text-xl font-bold pb-5">Basics</h3>
-        <form>
-          <label for="name">
-            <h5 class="mb-2">Character</h5>
-            <input
-              :value="retainer.name"
-              class="w-full rounded border-2 placeholder-material-400 px-4 py-2 mb-2 focus:border-material-600"
-              type="text"
-              name="name"
-              placeholder="Name"
-            />
-          </label>
-          <label for="culture">
-            <input
-              :value="retainer.culture"
-              class="w-full rounded border-2 placeholder-material-400 px-4 py-2 mb-6 focus:border-material-600"
-              type="text"
-              name="culture"
-              placeholder="Culture & epithet"
-            />
-          </label>
-          <label for="level" class="flex w-1/3 items-center  mb-2">
-            <h5 class="w-1/2">Level</h5>
-            <input
-              :value="retainer.level"
-              type="text"
-              name="level"
-              class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
-            />
-          </label>
-          <label for="AC" class="flex w-1/3 items-center  mb-2">
-            <h5 class="w-1/2">AC</h5>
-            <input
-              :value="retainer.AC"
-              type="text"
-              name="AC"
-              class="text-center border-2 border-material-600 px-2 py-2 w-1/2 rounded"
-            />
-          </label>
-        </form>
-      </main>
-      <footer class="border-t px-4 py-5">
-        <form>
-          <label for="name">
-            <h5 class="text-xl font-bold pb-5">Image</h5>
-            <button
-              class="rounded border-2 border-black font-bold text-center w-full p-3 transition ease-in-out duration-150 hover:bg-material-400"
-            >
-              + Upload character image
-            </button>
-          </label>
-        </form>
-      </footer>
-    </section>
-    <section class="w-full max-w-xs bg-material-50 rounded m-2">
-      <header class="border-b px-4 pt-6 pb-2">
-        <h2 class="font-bold text-2xl">Stats</h2>
-      </header>
-      <main class="px-4 py-5">
-        <h3 class="text-xl font-bold pb-1">Abilities</h3>
-        <p class="text-sm text-gray-700 leading-tight pb-3">
-          The ability modifier is based on the character's level
+  <main class="bg-white px-4 py-5 sm:p-6 w-10/12 md:w-8/12 mx-auto">
+    <div class="md:grid md:grid-cols-3 md:gap-6 mb-6 md:mb-8">
+      <div class="md:col-span-1">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Basics</h3>
+        <p class="mt-1 text-sm leading-5 text-gray-500">
+          This information are the basic information of any Retainer
         </p>
-        <form>
-          <label for="first" class="w-full flex justify-between items-center">
-            <h5 class="w-1/2">
-              <span class="font-bold">First ability</span>
-            </h5>
-            <div class="w-1/2 flex">
-              <input
-                :value="retainer.first.mod"
-                type="text"
-                class="w-5/12 rounded border-2 placeholder-material-400 px-4 py-2 mb-2 mr-1"
-                name="first_mod"
-              />
-              <select
-                name="first"
-                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
+      </div>
+      <div class="mt-5 md:mt-0 md:col-span-2">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-3 gap-6 mb-4 md:mb-8">
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="company_website"
+                class="block text-sm font-medium leading-5 text-gray-700"
               >
-                <option selected disabled>Stat</option>
-                <option value="str">STR</option>
-                <option value="dex">DEX</option>
-                <option value="con">CON</option>
-                <option value="int">INT</option>
-                <option value="wis">WIS</option>
-                <option value="cha">CHA</option>
-              </select>
+                Name
+              </label>
+              <div class="mt-1 rounded-md shadow-sm">
+                <input
+                  id="company_website"
+                  class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="Sir Pleb"
+                />
+              </div>
             </div>
-          </label>
-          <label for="second" class="w-full flex justify-between items-center">
-            <h5 class="w-1/2">
-              <span class="font-bold">Second ability</span>
-            </h5>
-            <div class="w-1/2 flex">
-              <input
-                :value="retainer.second.mod"
-                type="text"
-                class="w-5/12 rounded border-2 placeholder-material-400 px-4 py-2 mb-2 mr-1"
-                name="second_mod"
-              />
-              <select
-                name="second"
-                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
+          </div>
+
+          <div class="grid grid-cols-3 gap-6 mb-4 md:mb-8">
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="company_website"
+                class="block text-sm font-medium leading-5 text-gray-700"
               >
-                <option selected disabled>Stat</option>
-                <option value="str">STR</option>
-                <option value="dex">DEX</option>
-                <option value="con">CON</option>
-                <option value="int">INT</option>
-                <option value="wis">WIS</option>
-                <option value="cha">CHA</option>
-              </select>
+                Title
+              </label>
+              <div class="mt-1 rounded-md shadow-sm">
+                <input
+                  id="company_website"
+                  class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="The Internet Nerd"
+                />
+              </div>
+              <p class="mt-2 text-sm text-gray-500">
+                Error
+              </p>
             </div>
-          </label>
-          <label for="worst" class="w-full flex items-center">
-            <h5 class="w-1/2 flex items-center">
-              <input
-                v-model="worst_is_active"
-                type="checkbox"
-                class="form-checkbox w-4 h-4 mr-1"
-              />
-              <span class="font-bold">Worst ability</span>
-            </h5>
-            <div class="w-1/2 flex">
-              <input
-                v-model="worst.mod"
-                type="text"
-                class="w-5/12 text-xs rounded border-2 placeholder-material-400 px-1 py-1 mb-2 mr-1"
-                :disabled="!worst_is_active"
-                name="worst_mod"
-              />
-              <select
-                v-model="worst.name"
-                name="worst"
-                class="w-7/12 rounded border-2 px-4 py-2 mb-2 form-select"
-                :disabled="!worst_is_active"
+          </div>
+
+          <div class="grid grid-cols-6 gap-6 mb-4 md:mb-8">
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="company_website"
+                class="block text-sm font-medium leading-5 text-gray-700"
               >
-                <option selected disabled>Stat</option>
-                <option value="str">STR</option>
-                <option value="dex">DEX</option>
-                <option value="con">CON</option>
-                <option value="int">INT</option>
-                <option value="wis">WIS</option>
-                <option value="cha">CHA</option>
-              </select>
+                <strong>A</strong>rmour <strong>C</strong>lass
+              </label>
+              <div class="mt-1 rounded-md shadow-sm">
+                <input
+                  id="company_website"
+                  class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="10"
+                />
+              </div>
+              <p class="mt-2 text-sm text-gray-500">
+                Error
+              </p>
             </div>
-          </label>
-        </form>
-      </main>
-      <footer class="border-t px-4 py-5">
-        <h3 class="text-xl font-bold pb-1">Skills</h3>
-        <p class="text-sm text-gray-700 leading-tight pb-3">
-          Skill scores are based on the character's level and abilities
-        </p>
-        <form>
-          <label for="skills">
-            <h5>Add skills below</h5>
-            <Multiselect
-              v-model="selected_skills"
-              tag-placeholder="Add this as new tag"
-              placeholder="Search or add a skill"
-              :options="skills"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              :preserve-search="true"
-              :max="3"
-              :taggable="true"
-              label="skills"
-              track-by="name"
-              @tag="addTag"
-            >
-              <template
-                slot="selection"
-                slot-scope="{ values, search, isOpen }"
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="company_website"
+                class="block text-sm font-medium leading-5 text-gray-700"
               >
-                <span
-                  v-if="values.length && !isOpen"
-                  class="multiselect__single"
-                >
-                  {{ values.length }} options selected
-                </span>
-              </template>
-              <template slot="option" slot-scope="props">
-                <!-- <img
-                  class="option__image"
-                  :src="props.option.img"
-                  alt="No Man’s Sky"
-                /> -->
-                <div class="option__desc">
-                  <span class="option__title">{{ props.option.name }}</span>
-                  <span class="option__small">{{ props.option.stat }}</span>
+                Level
+              </label>
+              <div class="mt-1 rounded-md shadow-sm">
+                <input
+                  id="company_website"
+                  class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="0"
+                />
+              </div>
+              <p class="mt-2 text-sm text-gray-500">
+                Error
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-6 mb-4 md:mb-8">
+            <div class="col-span-3 sm:col-span-2">
+              <label class="block text-sm leading-5 font-medium text-gray-700">
+                Retainer Image
+              </label>
+              <div
+                class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+              >
+                <div class="text-center">
+                  <svg
+                    class="mx-auto h-12 w-12 text-gray-400"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 48 48"
+                  >
+                    <path
+                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <p class="mt-1 text-sm text-gray-600">
+                    <button
+                      class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-300 ease-in-out"
+                    >
+                      Upload a file
+                    </button>
+                    or drag and drop
+                  </p>
+                  <p class="mt-1 text-xs text-gray-500">
+                    PNG, JPG, GIF up to 10MB
+                  </p>
                 </div>
-              </template>
-            </Multiselect>
-          </label>
+              </div>
+            </div>
+          </div>
         </form>
-      </footer>
-    </section>
-    <section class="w-full max-w-xs bg-material-50 rounded m-2">
-      <header class="border-b px-4 pt-6 pb-2">
-        <h2 class="font-bold text-2xl">Actions</h2>
-      </header>
-      <main class="px-4 py-5">
-        <h3 class="text-xl font-bold pb-5">Signature attack</h3>
-        <form>
-          <label for="signature_name">
-            <section class="flex justify-between mb-2">
-              <input
-                v-model="signature_name"
-                class="w-1/2 rounded border placeholder-material-400 px-4 py-2 mr-2"
-                type="text"
-                name="signature_name"
-              />
-              <select
-                name="signature_cost"
-                class="w-1/2 ml-2 rounded border px-4 py-2 form-select"
+      </div>
+    </div>
+
+    <div class="md:grid md:grid-cols-3 md:gap-6 mb-6 md:mb-8">
+      <div class="md:col-span-1">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">
+          Stats
+        </h3>
+        <p class="mt-1 text-sm leading-5 text-gray-500">
+          This are the mechanic information on who good is the retainer
+        </p>
+      </div>
+      <div class="mt-5 md:mt-0 md:col-span-2">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-3 gap-6 mb-6 md:mb-8">
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Primary Stat</label
               >
-                <option selected disabled>Cost</option>
-                <option value="str">Action</option>
-                <option value="dex">Bonus Action</option>
-                <option value="con">Reaction</option>
-                <option value="int">Free Action</option>
-              </select>
-            </section>
-            <textarea
-              id=""
-              name="signature_description"
-              rows="3"
-              placeholder="Description"
-              class="w-full rounded border px-4 py-2"
+              <p class="text-sm leading-5 text-gray-500">
+                This should be the stat with the best bonus
+              </p>
+              <div class="flex">
+                <select
+                  id="country"
+                  class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                >
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+                <input
+                  id="first_name"
+                  class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:ml-1"
+                  placeholder="+4"
+                />
+              </div>
+            </div>
+
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Secondary Stat</label
+              >
+              <p class="text-sm leading-5 text-gray-500">
+                This will be a stat that's above averge
+              </p>
+              <div class="flex">
+                <select
+                  id="country"
+                  class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                >
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+                <input
+                  id="first_name"
+                  class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:ml-1"
+                  placeholder="+2"
+                />
+              </div>
+            </div>
+
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Weak Stat</label
+              >
+              <p class="text-sm leading-5 text-gray-500">
+                This is where the retainer usually fails
+              </p>
+              <div class="flex">
+                <select
+                  id="country"
+                  class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                >
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+                <input
+                  id="first_name"
+                  class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:ml-1"
+                  disabled
+                  placeholder="Disadvantage"
+                  value="Disadvantage"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="md:grid md:grid-cols-3 md:gap-6 mb-6 md:mb-8">
+      <div class="md:col-span-1">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">
+          Abilities
+        </h3>
+        <p class="mt-1 text-sm leading-5 text-gray-500">
+          This are the things the retainer can do
+        </p>
+      </div>
+      <div class="mt-5 md:mt-0 md:col-span-2">
+        <form action="#" method="POST">
+          <section class="grid grid-cols-3 gap-6 mb-6 md:mb-8">
+            <header class="col-span-3 sm:col-span-2">
+              <legend
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+              >
+                Signature Attack
+              </legend>
+              <p class="text-sm leading-5 text-gray-500">
+                A at will ability
+              </p>
+            </header>
+            <div class="grid grid-cols-6 gap-6 col-span-3 sm:col-span-2">
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="company_website"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                >
+                  Name
+                </label>
+                <div class="mt-1 rounded-md shadow-sm">
+                  <input
+                    id="company_website"
+                    class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                    placeholder="10"
+                  />
+                </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Error
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="company_website"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                >
+                  Cost
+                </label>
+                <div class="mt-1 rounded-md shadow-sm">
+                  <select
+                    id="country"
+                    class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                  >
+                    <option>United States</option>
+                    <option>Canada</option>
+                    <option>Mexico</option>
+                  </select>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Error
+                </p>
+              </div>
+            </div>
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Description</label
+              >
+              <div class="rounded-md shadow-sm">
+                <textarea
+                  id="about"
+                  rows="3"
+                  class="form-textarea mt-1 block w-full transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="you@example.com"
+                ></textarea>
+              </div>
+            </div>
+          </section>
+          <section class="grid grid-cols-3 gap-6 mb-6 md:mb-8">
+            <button
+              class="col-span-3 sm:col-span-2 transition transform duration-300 ease-in-out rounded-md shadow-sm border py-2 hover:shadow-lg hover:bg-gray-200 hover:scale-105"
             >
-            </textarea>
-          </label>
+              + Add Special Action
+            </button>
+          </section>
+          <section class="grid grid-cols-3 gap-6 mb-6 md:mb-8">
+            <header class="col-span-3 sm:col-span-2">
+              <legend
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+              >
+                Special Action
+              </legend>
+              <p class="text-sm leading-5 text-gray-500">
+                A special ability that adds to the retainers arcenal
+              </p>
+            </header>
+            <div class="grid grid-cols-6 gap-6 col-span-3 sm:col-span-2">
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="company_website"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                >
+                  Name
+                </label>
+                <div class="mt-1 rounded-md shadow-sm">
+                  <input
+                    id="company_website"
+                    class="form-input flex-1 block w-full rounded-md transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                    placeholder="10"
+                  />
+                </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Error
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="company_website"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                >
+                  Cost
+                </label>
+                <div class="mt-1 rounded-md shadow-sm">
+                  <select
+                    id="country"
+                    class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                  >
+                    <option>United States</option>
+                    <option>Canada</option>
+                    <option>Mexico</option>
+                  </select>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Error
+                </p>
+              </div>
+            </div>
+            <div class="col-span-3 sm:col-span-2">
+              <div class="flex items-center h-5">
+                <input
+                  id="candidates"
+                  type="checkbox"
+                  class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out mr-2"
+                />
+                <label
+                  for="first_name"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                  >Limited uses</label
+                >
+              </div>
+              <p class="text-sm leading-5 text-gray-500">
+                It may have a limited amout of uses per day
+              </p>
+              <div class="rounded-md shadow-sm">
+                <select
+                  id="country"
+                  class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-300 ease-in-out sm:text-sm sm:leading-5 sm:mr-1"
+                >
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-span-3 sm:col-span-2">
+              <label
+                for="first_name"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Description</label
+              >
+              <div class="rounded-md shadow-sm">
+                <textarea
+                  id="about"
+                  rows="3"
+                  class="form-textarea mt-1 block w-full transition duration-300 ease-in-out sm:text-sm sm:leading-5"
+                  placeholder="you@example.com"
+                ></textarea>
+              </div>
+            </div>
+          </section>
         </form>
-      </main>
-      <footer class="border-t px-4 py-5">
-        <h3 class="text-xl font-bold pb-1">Special actions</h3>
-        <SpecialActionForm v-for="special in specials" :key="special.id" />
-        <button
-          v-if="specials.length <= 2"
-          class="rounded border-2 border-black font-bold text-center w-full p-3 transition ease-in-out duration-150 hover:bg-material-400"
-          @click="addSpecial"
-        >
-          + Add special action
-        </button>
-      </footer>
-    </section>
-    <section class="w-full max-w-xs bg-material-50 rounded m-2">
-      <header class="border-b px-4 pt-6 pb-2">
-        <h2 class="font-bold text-2xl">Quote</h2>
-      </header>
-      <main class="px-4 py-5">
-        <form>
-          <textarea
-            v-model="quote"
-            name="quote"
-            rows="2"
-            placeholder="To be or not to be..."
-            class="w-full rounded border px-4 py-2"
-          >
-          </textarea>
-        </form>
-      </main>
-    </section>
-    <section class="w-full max-w-xs bg-material-50 rounded m-2">
-      <main class="px-4 py-5">
-        <button class="btn btn__main" @click="save">
-          save
-        </button>
-      </main>
-    </section>
+      </div>
+    </div>
   </main>
 </template>
-
-<script>
-import { mapActions, mapState } from 'vuex'
-import Multiselect from 'vue-multiselect'
-import SpecialActionForm from '~/components/create/SpecialActionForm'
-export default {
-  components: {
-    SpecialActionForm,
-    Multiselect
-  },
-  data() {
-    return {
-      stats: [
-        { name: 'Strength', code: 'STR' },
-        { name: 'Dexterity', code: 'DEX' },
-        { name: 'Constitution', code: 'CON' },
-        { name: 'Inteligence', code: 'INT' },
-        { name: 'Wisdom', code: 'WIS' },
-        { name: 'Charisma', code: 'CHA' }
-      ],
-      skills: [
-        { name: 'Athletics', stat: 'STR' },
-        { name: 'Acrobatics', stat: 'DEX' },
-        { name: 'Sleight of Hand', stat: 'DEX' },
-        { name: 'Stealth', stat: 'DEX' },
-        { name: 'Arcana', stat: 'INT' },
-        { name: 'History', stat: 'INT' },
-        { name: 'Investigation', stat: 'INT' },
-        { name: 'Nature', stat: 'INT' },
-        { name: 'Religion', stat: 'INT' },
-        { name: 'Animal Handling', stat: 'WIS' },
-        { name: 'Insight', stat: 'WIS' },
-        { name: 'Medicine', stat: 'WIS' },
-        { name: 'Perception', stat: 'WIS' },
-        { name: 'Survival', stat: 'WIS' },
-        { name: 'Deception', stat: 'CHA' },
-        { name: 'Intimidation', stat: 'CHA' },
-        { name: 'Performance', stat: 'CHA' },
-        { name: 'Persuasion', stat: 'CHA' }
-      ]
-    }
-  },
-  computed: {
-    ...mapState({
-      retainer: (state) => state.retainers.active
-    })
-  },
-  methods: {
-    ...mapActions({
-      addSpecial: 'retainers/addSpecial',
-      setAttribute: 'retainer/setAttribute'
-    }),
-    addTag(newTag) {
-      const tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
-      }
-      this.options.push(tag)
-      this.value.push(tag)
-    },
-    save() {
-      this.$router.push({ path: `/retainers` })
-    }
-  }
-}
-</script>
-
-<style scoped>
-.stat-dropdown {
-  width: 26%;
-}
-.btn {
-  @apply border-2 rounded transition ease-in duration-150 px-4 py-2 mr-4;
-}
-.btn__main {
-  @apply border-main-500 text-secondary-100 bg-main-500;
-}
-.btn__alter {
-  @apply border-main-500 text-main-500 bg-transparent;
-}
-.btn__main:hover {
-  @apply text-main-500 bg-transparent;
-}
-.btn__alter:hover {
-  @apply text-secondary-100 bg-main-500;
-}
-</style>

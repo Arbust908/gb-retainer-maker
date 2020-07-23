@@ -1,5 +1,9 @@
 export default {
   mode: 'universal',
+  server: {
+    port: 3333, // default: 3000
+    timing: false
+  },
   /*
    ** Headers of the page
    */
@@ -149,17 +153,17 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    'nuxt-vue-multiselect',
-    [
-      '@yabhq/nuxt-hotjar',
-      {
-        hjid: 1877978, // required
-        hjsv: 6, // optional
-        defer: true, // optional
-        async: false, // optional
-        dev: false // optional
-      }
-    ]
+    'nuxt-vue-multiselect'
+    // [
+    //   '@yabhq/nuxt-hotjar',
+    //   {
+    //     hjid: 1877978, // required
+    //     hjsv: 6, // optional
+    //     defer: true, // optional
+    //     async: false, // optional
+    //     dev: false // optional
+    //   }
+    // ]
   ],
   /*
    ** Axios module configuration

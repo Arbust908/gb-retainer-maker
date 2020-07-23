@@ -2,19 +2,19 @@ export const state = () => ({
   filter: 'all',
   all: [],
   active: {
-    name: '',
-    culture: '',
-    level: 1,
-    AC: 8,
-    first: { stat: null, mod: 0 },
-    second: { stat: null, mod: 0 },
+    name: null,
+    culture: null,
+    level: null,
+    AC: null,
+    first: { stat: null, mod: null },
+    second: { stat: null, mod: null },
     worst_is_active: false,
-    worst: { stat: null, mod: 0 },
+    worst: { stat: null, mod: null },
     selected_skills: [],
-    signature_name: '',
+    signature_name: null,
     specials: [],
-    quote: '',
-    slots: 1
+    quote: null,
+    slots: null
   },
   loader: false
 })
