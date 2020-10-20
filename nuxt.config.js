@@ -165,6 +165,16 @@ export default {
     //   }
     // ]
   ],
+  pwa: {
+    manifest: {
+      name: 'Gatobuho. Material para Rol en Español',
+      lang: 'es',
+      short_name: 'Gatobuho',
+      description:
+        'Webapp con distintos tipos de contenidos en español par ajuegos de rol de todo tipo!',
+      background_color: '#414042'
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
